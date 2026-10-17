@@ -1,0 +1,695 @@
+@import "tailwindcss";
+
+/* ============================================================
+   HOOKSTREAM THEME — ported 1:1 from the reference design system
+   (Tailwind v3 config + index.css) into Tailwind v4 CSS-first
+   syntax. Every token maps to the same CSS variables, so
+   [data-theme="dark"] / [data-theme="light"] switching works
+   exactly like the original.
+   ============================================================ */
+
+@theme inline {
+  /* ---------- Legacy aliases ---------- */
+  --color-primary: var(--primary-color);
+  --color-text: var(--text-color);
+  --color-brand: var(--brand-primary);
+
+  /* ---------- Theme backgrounds ---------- */
+  --color-theme-bg: var(--bg-primary);
+  --color-theme-card: var(--bg-card);
+  --color-theme-card-hover: var(--bg-card-hover);
+  --color-theme-secondary: var(--bg-secondary);
+  --color-theme-tertiary: var(--bg-tertiary);
+  --color-theme-input: var(--bg-input);
+  --color-theme-modal: var(--bg-modal);
+  --color-theme-sidebar: var(--bg-sidebar);
+  --color-theme-navbar: var(--bg-navbar);
+  --color-theme-dropdown: var(--bg-dropdown);
+  --color-theme-hover: var(--bg-hover);
+  --color-theme-selected: var(--bg-selected);
+  --color-theme-darker: var(--bg-darker);
+  --color-theme-darker-card: var(--bg-darker-card);
+  --color-theme-darker-card-hover: var(--bg-darker-card-hover);
+  --color-table-head: var(--table-head-bg);
+
+  /* ---------- Theme text ---------- */
+  --color-theme-text: var(--text-primary);
+  --color-theme-text-secondary: var(--text-secondary);
+  --color-theme-text-tertiary: var(--text-tertiary);
+  --color-theme-text-inactive: var(--text-inactive);
+  --color-theme-text-muted: var(--text-muted);
+  --color-theme-text-inverse: var(--text-inverse);
+  --color-theme-placeholder: var(--text-placeholder);
+
+  /* ---------- Theme borders ---------- */
+  --color-theme-border: var(--border-primary);
+  --color-theme-border-secondary: var(--border-secondary);
+  --color-theme-border-hover: var(--border-hover);
+  --color-theme-border-input: var(--border-input);
+  --color-theme-border-focus: var(--border-focus);
+  --color-table-head-border: var(--table-head-border);
+
+  /* ---------- Brand / primary ---------- */
+  --color-brand-primary: var(--primary);
+  --color-brand-primary-hover: var(--primary-hover);
+  --color-brand-primary-bg: var(--primary-bg);
+  --color-brand-primary-border: var(--primary-border);
+
+  /* ---------- Status colors ---------- */
+  --color-status-completed: var(--status-completed);
+  --color-status-completed-bg: var(--status-completed-bg);
+  --color-status-completed-border: var(--status-completed-border);
+  --color-status-active: var(--status-active);
+  --color-status-active-bg: var(--status-active-bg);
+  --color-status-active-border: var(--status-active-border);
+  --color-status-paused: var(--status-paused);
+  --color-status-paused-bg: var(--status-paused-bg);
+  --color-status-paused-border: var(--status-paused-border);
+  --color-status-scheduled: var(--status-scheduled);
+  --color-status-scheduled-bg: var(--status-scheduled-bg);
+  --color-status-scheduled-border: var(--status-scheduled-border);
+  --color-status-dumped: var(--status-dumped);
+  --color-status-dumped-bg: var(--status-dumped-bg);
+  --color-status-dumped-border: var(--status-dumped-border);
+
+  /* ---------- Sentiment ---------- */
+  --color-sentiment-high: var(--sentiment-high);
+  --color-sentiment-high-bg: var(--sentiment-high-bg);
+  --color-sentiment-mid: var(--sentiment-mid);
+  --color-sentiment-mid-bg: var(--sentiment-mid-bg);
+  --color-sentiment-low: var(--sentiment-low);
+  --color-sentiment-low-bg: var(--sentiment-low-bg);
+
+  /* ---------- Outcomes ---------- */
+  --color-outcome-interested: var(--outcome-interested);
+  --color-outcome-interested-bg: var(--outcome-interested-bg);
+  --color-outcome-meeting: var(--outcome-meeting);
+  --color-outcome-meeting-bg: var(--outcome-meeting-bg);
+  --color-outcome-followup: var(--outcome-followup);
+  --color-outcome-followup-bg: var(--outcome-followup-bg);
+  --color-outcome-not-interested: var(--outcome-not-interested);
+  --color-outcome-not-interested-bg: var(--outcome-not-interested-bg);
+  --color-outcome-none: var(--outcome-none);
+  --color-outcome-none-bg: var(--outcome-none-bg);
+
+  /* ---------- Scrollbar ---------- */
+  --color-scrollbar-track: var(--scrollbar-track);
+  --color-scrollbar-thumb: var(--scrollbar-thumb);
+  --color-scrollbar-thumb-hover: var(--scrollbar-thumb-hover);
+
+  /* ---------- Conversation bubbles ---------- */
+  --color-conv-bubble-out: var(--conv-bubble-out-bg);
+  --color-conv-bubble-out-border: var(--conv-bubble-out-border);
+  --color-conv-bubble-out-text: var(--conv-bubble-out-text);
+  --color-conv-bubble-in: var(--conv-bubble-in-bg);
+  --color-conv-bubble-in-border: var(--conv-bubble-in-border);
+  --color-conv-bubble-in-text: var(--conv-bubble-in-text);
+  --color-conv-thread: var(--conv-thread-bg);
+  --color-conv-wa-out: var(--conv-wa-bubble-out-bg);
+  --color-conv-wa-out-border: var(--conv-wa-bubble-out-border);
+
+  /* ---------- Shadows ---------- */
+  --shadow-theme-sm: var(--shadow-sm);
+  --shadow-theme-md: var(--shadow-md);
+  --shadow-theme-lg: var(--shadow-lg);
+  --shadow-theme-card: var(--shadow-card);
+
+  /* ---------- Fonts ---------- */
+  --font-inter: "Inter", sans-serif;
+  --font-ibm: "IBM Plex Sans", sans-serif;
+  --font-mono: "JetBrains Mono", "Fira Code", ui-monospace, monospace;
+
+  /* ---------- Animations ---------- */
+  --animate-pulse-dot: pulse-dot 1.8s ease-in-out infinite;
+  --animate-brief-flash: brief-flash-highlight 2.5s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+  --animate-toast-slide-up: toast-slide-up 0.28s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+  --animate-shimmer: shimmer 2.5s infinite;
+  --animate-slide-up: slide-up 0.5s ease both;
+}
+
+/* ============================================================
+   LEGACY ALIASES (always available, both themes)
+   ============================================================ */
+:root {
+  --primary-color: var(--primary);
+  --text-color: var(--text-primary);
+  --brand-primary: var(--primary);
+
+  /* ---------- Avatar gradients ---------- */
+  --avatar-gradient-1: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+  --avatar-gradient-2: linear-gradient(135deg, #f43f5e 0%, #ec4899 100%);
+  --avatar-gradient-3: linear-gradient(135deg, #10b981 0%, #059669 100%);
+  --avatar-gradient-4: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+  --avatar-gradient-5: linear-gradient(135deg, #3b82f6 0%, #06b6d4 100%);
+  --avatar-gradient-6: linear-gradient(135deg, #d946ef 0%, #a855f7 100%);
+  --avatar-gradient-7: linear-gradient(135deg, #ff7e5f 0%, #ff5252 100%);
+  --avatar-gradient-8: linear-gradient(135deg, #00c6ff 0%, #0072ff 100%);
+}
+
+/* ============================================================
+   DARK MODE (default)
+   ============================================================ */
+:root,
+[data-theme="dark"] {
+  color-scheme: dark;
+
+  /* ---------- Backgrounds ---------- */
+  --bg-primary: #0f0f13;
+  --bg-card: rgba(255, 255, 255, 0.02);
+  --bg-card-hover: rgba(255, 255, 255, 0.04);
+  --bg-secondary: rgba(255, 255, 255, 0.04);
+  --bg-tertiary: rgba(255, 255, 255, 0.03);
+  --bg-input: rgba(255, 255, 255, 0.02);
+  --bg-modal: #0f0f13;
+  --bg-sidebar: #0f0f13;
+  --bg-navbar: #0f0f13;
+  --bg-dropdown: #18181f;
+  --bg-hover: rgba(255, 255, 255, 0.04);
+  --bg-selected: rgba(99, 102, 241, 0.12);
+
+  /* ---------- Table head (solid, sticky-safe) ---------- */
+  --table-head-bg: #14141b;
+  --table-head-border: rgba(255, 255, 255, 0.08);
+
+  --bg-darker: rgba(255, 255, 255, 0.2);
+  --bg-darker-card: rgba(255, 255, 255, 0.01);
+  --bg-darker-card-hover: rgba(255, 255, 255, 0.02);
+
+  /* ---------- Borders ---------- */
+  --border-primary: rgba(255, 255, 255, 0.05);
+  --border-secondary: rgba(255, 255, 255, 0.08);
+  --border-hover: rgba(255, 255, 255, 0.12);
+  --border-input: rgba(255, 255, 255, 0.06);
+  --border-focus: rgba(99, 102, 241, 0.5);
+
+  /* ---------- Text ---------- */
+  --text-primary: #ffffff;
+  --text-secondary: rgba(255, 255, 255, 0.65);
+  --text-tertiary: rgba(255, 255, 255, 0.4);
+  --text-inactive: rgba(198, 59, 59, 0.3);
+  --text-muted: rgba(255, 255, 255, 0.25);
+  --text-inverse: #0f0f13;
+  --text-placeholder: rgba(255, 255, 255, 0.28);
+
+  /* ---------- Brand / primary ---------- */
+  --primary: #6366f1;
+  --primary-hover: #5558e8;
+  --primary-bg: rgba(99, 102, 241, 0.12);
+  --primary-border: rgba(99, 102, 241, 0.3);
+
+  /* ---------- Status colors ---------- */
+  --status-completed: #ef4444;
+  --status-completed-bg: rgba(239, 68, 68, 0.1);
+  --status-completed-border: rgba(239, 68, 68, 0.25);
+
+  --status-active: #10b981;
+  --status-active-bg: rgba(16, 185, 129, 0.1);
+  --status-active-border: rgba(16, 185, 129, 0.25);
+
+  --status-paused: #3b82f6;
+  --status-paused-bg: rgba(59, 130, 246, 0.1);
+  --status-paused-border: rgba(59, 130, 246, 0.25);
+
+  --status-scheduled: #f59e0b;
+  --status-scheduled-bg: rgba(245, 158, 11, 0.1);
+  --status-scheduled-border: rgba(245, 158, 11, 0.25);
+
+  --status-dumped: #9ca3af;
+  --status-dumped-bg: rgba(156, 163, 175, 0.15);
+  --status-dumped-border: rgba(156, 163, 175, 0.25);
+
+  /* ---------- Sentiment ---------- */
+  --sentiment-high: #059669;
+  --sentiment-high-bg: rgba(5, 150, 105, 0.12);
+  --sentiment-mid: #d97706;
+  --sentiment-mid-bg: rgba(217, 119, 6, 0.12);
+  --sentiment-low: #dc2626;
+  --sentiment-low-bg: rgba(220, 38, 38, 0.12);
+
+  /* ---------- Outcome segments ---------- */
+  --outcome-interested: #6366f1;
+  --outcome-interested-bg: rgba(99, 102, 241, 0.12);
+  --outcome-meeting: #34d399;
+  --outcome-meeting-bg: rgba(52, 211, 153, 0.12);
+  --outcome-followup: #fbbf24;
+  --outcome-followup-bg: rgba(251, 191, 36, 0.12);
+  --outcome-not-interested: #f87171;
+  --outcome-not-interested-bg: rgba(248, 113, 113, 0.12);
+  --outcome-none: #3f3f46;
+  --outcome-none-bg: rgba(63, 63, 70, 0.25);
+
+  /* ---------- Shadows ---------- */
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.4);
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.5);
+  --shadow-lg: 0 10px 30px rgba(0, 0, 0, 0.6);
+  --shadow-card: 0 2px 8px rgba(0, 0, 0, 0.4);
+
+  /* ---------- Scrollbar ---------- */
+  --scrollbar-track: rgba(255, 255, 255, 0.02);
+  --scrollbar-thumb: rgba(255, 255, 255, 0.1);
+  --scrollbar-thumb-hover: rgba(255, 255, 255, 0.2);
+
+  /* ---------- React-select ---------- */
+  --rs-bg: #18181f;
+  --rs-border: rgba(255, 255, 255, 0.08);
+
+  /* ---------- Conversation bubbles (dark) ---------- */
+  --conv-bubble-out-bg: rgba(99, 102, 241, 0.18);
+  --conv-bubble-out-border: rgba(99, 102, 241, 0.35);
+  --conv-bubble-out-text: #ffffff;
+  --conv-bubble-in-bg: rgba(255, 255, 255, 0.04);
+  --conv-bubble-in-border: rgba(255, 255, 255, 0.07);
+  --conv-bubble-in-text: rgba(255, 255, 255, 0.88);
+  --conv-thread-bg: #09090d;
+  --conv-wa-bubble-out-bg: rgba(37, 211, 102, 0.14);
+  --conv-wa-bubble-out-border: rgba(37, 211, 102, 0.28);
+}
+
+/* ============================================================
+   LIGHT MODE
+   ============================================================ */
+[data-theme="light"] {
+  color-scheme: light;
+
+  /* ---------- Backgrounds ---------- */
+  --bg-primary: #f4f4f8;
+  --bg-card: #ffffff;
+  --bg-card-hover: #f9f9fc;
+  --bg-secondary: #ebebf2;
+  --bg-tertiary: #e4e4ee;
+  --bg-input: #ffffff;
+  --bg-modal: #ffffff;
+  --bg-sidebar: #ffffff;
+  --bg-navbar: rgba(244, 244, 248, 0.95);
+  --bg-dropdown: #ffffff;
+  --bg-hover: rgba(0, 0, 0, 0.04);
+  --bg-selected: rgba(99, 102, 241, 0.08);
+  --bg-darker: #ffffff;
+
+  --table-head-bg: #eaeaf1;
+  --table-head-border: rgba(0, 0, 0, 0.08);
+
+  /* ---------- Borders ---------- */
+  --border-primary: rgba(0, 0, 0, 0.07);
+  --border-secondary: rgba(0, 0, 0, 0.1);
+  --border-hover: rgba(0, 0, 0, 0.15);
+  --border-input: rgba(0, 0, 0, 0.1);
+  --border-focus: rgba(99, 102, 241, 0.5);
+
+  /* ---------- Text ---------- */
+  --text-primary: #0f0f13;
+  --text-secondary: rgba(15, 15, 19, 0.65);
+  --text-tertiary: rgba(15, 15, 19, 0.45);
+  --text-muted: rgba(15, 15, 19, 0.3);
+  --text-inverse: #ffffff;
+  --text-placeholder: rgba(15, 15, 19, 0.32);
+
+  /* ---------- Brand / primary ---------- */
+  --primary: #6366f1;
+  --primary-hover: #4f46e5;
+  --primary-bg: rgba(99, 102, 241, 0.08);
+  --primary-border: rgba(99, 102, 241, 0.25);
+
+  /* ---------- Status colors ---------- */
+  --status-completed: #dc2626;
+  --status-completed-bg: rgba(220, 38, 38, 0.08);
+  --status-completed-border: rgba(220, 38, 38, 0.2);
+
+  --status-active: #059669;
+  --status-active-bg: rgba(5, 150, 105, 0.08);
+  --status-active-border: rgba(5, 150, 105, 0.2);
+
+  --status-paused: #2563eb;
+  --status-paused-bg: rgba(37, 99, 235, 0.08);
+  --status-paused-border: rgba(37, 99, 235, 0.2);
+
+  --status-scheduled: #d97706;
+  --status-scheduled-bg: rgba(217, 119, 6, 0.08);
+  --status-scheduled-border: rgba(217, 119, 6, 0.2);
+
+  --status-dumped: #6b7280;
+  --status-dumped-bg: rgba(107, 114, 128, 0.08);
+  --status-dumped-border: rgba(107, 114, 128, 0.2);
+
+  /* ---------- Sentiment ---------- */
+  --sentiment-high: #059669;
+  --sentiment-high-bg: rgba(5, 150, 105, 0.08);
+  --sentiment-mid: #d97706;
+  --sentiment-mid-bg: rgba(217, 119, 6, 0.08);
+  --sentiment-low: #dc2626;
+  --sentiment-low-bg: rgba(220, 38, 38, 0.08);
+
+  /* ---------- Outcome segments ---------- */
+  --outcome-interested: #4f46e5;
+  --outcome-interested-bg: rgba(79, 70, 229, 0.08);
+  --outcome-meeting: #059669;
+  --outcome-meeting-bg: rgba(5, 150, 105, 0.08);
+  --outcome-followup: #d97706;
+  --outcome-followup-bg: rgba(217, 119, 6, 0.08);
+  --outcome-not-interested: #dc2626;
+  --outcome-not-interested-bg: rgba(220, 38, 38, 0.08);
+  --outcome-none: #71717a;
+  --outcome-none-bg: rgba(113, 113, 122, 0.1);
+
+  /* ---------- Shadows ---------- */
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.06);
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.08);
+  --shadow-lg: 0 10px 30px rgba(0, 0, 0, 0.1);
+  --shadow-card: 0 2px 8px rgba(0, 0, 0, 0.06);
+
+  /* ---------- Scrollbar ---------- */
+  --scrollbar-track: rgba(0, 0, 0, 0.03);
+  --scrollbar-thumb: rgba(0, 0, 0, 0.15);
+  --scrollbar-thumb-hover: rgba(0, 0, 0, 0.25);
+
+  /* ---------- React-select ---------- */
+  --rs-bg: #ffffff;
+  --rs-border: rgba(0, 0, 0, 0.1);
+
+  /* ---------- Conversation bubbles (light) ---------- */
+  --conv-bubble-out-bg: rgba(99, 102, 241, 0.12);
+  --conv-bubble-out-border: rgba(99, 102, 241, 0.25);
+  --conv-bubble-out-text: #1e1b4b;
+  --conv-bubble-in-bg: #ffffff;
+  --conv-bubble-in-border: rgba(0, 0, 0, 0.07);
+  --conv-bubble-in-text: #0f0f13;
+  --conv-thread-bg: #f0f0f5;
+  --conv-wa-bubble-out-bg: rgba(37, 211, 102, 0.1);
+  --conv-wa-bubble-out-border: rgba(37, 211, 102, 0.22);
+}
+
+/* ============================================================
+   BASE
+   ============================================================ */
+html.theme-switching *,
+html.theme-switching *::before,
+html.theme-switching *::after {
+  transition: none !important;
+}
+
+.no-transition,
+.no-transition * {
+  transition: none !important;
+}
+
+body {
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: "Inter", sans-serif;
+}
+
+/* Ambient glow accents — dark mode gets indigo aurora, light stays clean */
+[data-theme="dark"] body {
+  background-image:
+    radial-gradient(900px 480px at 12% -8%, rgba(99, 102, 241, 0.1), transparent 60%),
+    radial-gradient(800px 420px at 88% -12%, rgba(139, 92, 246, 0.07), transparent 55%),
+    radial-gradient(720px 520px at 55% 115%, rgba(16, 185, 129, 0.05), transparent 60%);
+  background-attachment: fixed;
+}
+
+::selection {
+  background-color: rgba(99, 102, 241, 0.35);
+  color: #ffffff;
+}
+
+/* ============================================================
+   SCROLLBAR
+   ============================================================ */
+::-webkit-scrollbar {
+  width: 0.5rem;
+  height: 0.5rem;
+}
+::-webkit-scrollbar-thumb {
+  background-color: var(--scrollbar-thumb);
+  border-radius: 9999px;
+  transition: background-color 0.2s;
+}
+::-webkit-scrollbar-thumb:hover {
+  background-color: var(--scrollbar-thumb-hover);
+}
+::-webkit-scrollbar-track {
+  background: var(--scrollbar-track);
+}
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--scrollbar-thumb) var(--scrollbar-track);
+}
+
+.hide-scrollbar::-webkit-scrollbar,
+.no-scrollbar::-webkit-scrollbar,
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+.hide-scrollbar,
+.no-scrollbar,
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* ============================================================
+   KEYFRAMES (ported from reference config)
+   ============================================================ */
+@keyframes pulse-dot {
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.4;
+    transform: scale(0.85);
+  }
+}
+
+@keyframes brief-flash-highlight {
+  0% {
+    box-shadow: inset 0 0 0 2px var(--primary), 0 0 12px var(--primary-border);
+  }
+  30% {
+    box-shadow: inset 0 0 0 2px var(--primary), 0 0 12px var(--primary-border);
+  }
+  100% {
+    box-shadow: none;
+  }
+}
+
+@keyframes toast-slide-up {
+  from {
+    opacity: 0;
+    transform: translateY(12px) scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -600px 0;
+  }
+  100% {
+    background-position: 600px 0;
+  }
+}
+
+@keyframes slide-up {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes gradient-pan {
+  0%,
+  100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+.pulse-active {
+  animation: pulse-dot 1.8s ease-in-out infinite;
+}
+
+.animate-brief-flash {
+  animation: brief-flash-highlight 2.5s cubic-bezier(0.25, 1, 0.5, 1) forwards !important;
+}
+
+.recording-toast {
+  animation: toast-slide-up 0.28s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+/* ============================================================
+   APP HELPERS (HookStream)
+   ============================================================ */
+.hs-fade-up {
+  animation: slide-up 0.5s ease both;
+}
+
+.hs-live-dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background-color: var(--status-active);
+  box-shadow: 0 0 0 2px var(--status-active-bg);
+  animation: pulse-dot 1.8s ease-in-out infinite;
+}
+
+.hs-skeleton {
+  background: linear-gradient(
+    90deg,
+    var(--bg-tertiary) 25%,
+    var(--border-secondary) 50%,
+    var(--bg-tertiary) 75%
+  );
+  background-size: 600px 100%;
+  animation: shimmer 1.4s linear infinite;
+}
+
+.hs-gradient-text {
+  background: linear-gradient(90deg, #818cf8, #c084fc, #818cf8);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: gradient-pan 6s ease infinite;
+}
+
+/* ---------- Avatar gradient utilities ---------- */
+.bg-avatar-1 { background: var(--avatar-gradient-1); }
+.bg-avatar-2 { background: var(--avatar-gradient-2); }
+.bg-avatar-3 { background: var(--avatar-gradient-3); }
+.bg-avatar-4 { background: var(--avatar-gradient-4); }
+.bg-avatar-5 { background: var(--avatar-gradient-5); }
+.bg-avatar-6 { background: var(--avatar-gradient-6); }
+.bg-avatar-7 { background: var(--avatar-gradient-7); }
+.bg-avatar-8 { background: var(--avatar-gradient-8); }
+
+/* ---------- Workflow gradients ---------- */
+.bg-workflow-gradient { background: linear-gradient(135deg, #8b5cf6 0%, #4f46e5 100%) !important; }
+.bg-trigger-gradient { background: linear-gradient(135deg, #fbbf24 0%, #f97316 100%) !important; }
+.bg-action-gradient { background: linear-gradient(135deg, #34d399 0%, #059669 100%) !important; }
+
+/* ---------- Universal cancel button ---------- */
+.theme-cancel-btn {
+  background-color: transparent !important;
+  color: var(--text-secondary) !important;
+  border: 1px solid var(--border-primary) !important;
+  border-radius: 6px !important;
+  box-shadow: none !important;
+}
+.theme-cancel-btn:hover,
+.theme-cancel-btn:focus {
+  background-color: var(--bg-hover) !important;
+  color: var(--text-primary) !important;
+  border-color: var(--border-hover) !important;
+  box-shadow: none !important;
+}
+
+/* ============================================================
+   MENU / LISTBOX ROLE OVERRIDES
+   (also restyles MUI Menus & Select dropdowns consistently)
+   ============================================================ */
+[role="menu"] {
+  background-color: var(--bg-dropdown) !important;
+  border: 1px solid var(--border-primary) !important;
+  box-shadow: var(--shadow-lg) !important;
+  border-radius: 6px !important;
+}
+
+[role="menu"] [role="menuitem"] {
+  color: var(--text-primary) !important;
+}
+
+[role="menu"] [role="menuitem"]:is(:hover, :focus),
+[role="menu"] [role="menuitem"].Mui-focusVisible {
+  background-color: var(--bg-hover) !important;
+}
+
+ul[role="listbox"] {
+  background-color: var(--bg-dropdown) !important;
+  border: 1px solid var(--border-primary) !important;
+  box-shadow: var(--shadow-lg) !important;
+}
+
+ul[role="listbox"] :is(li, [role="option"]) {
+  color: var(--text-primary) !important;
+}
+
+ul[role="listbox"] :is(li, [role="option"]):is(:hover, :focus, .Mui-focusVisible) {
+  background-color: var(--bg-hover) !important;
+}
+
+ul[role="listbox"] :is(li, [role="option"])[aria-selected="true"],
+ul[role="listbox"] :is(li, [role="option"]).Mui-selected {
+  background-color: var(--primary-bg) !important;
+  color: var(--primary) !important;
+}
+
+/* ============================================================
+   NATIVE FORM ELEMENTS (theme-driven)
+   ============================================================ */
+input:not([type="checkbox"]):not([type="radio"]):not([type="range"]),
+textarea {
+  color: var(--text-primary) !important;
+  caret-color: var(--primary);
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: var(--text-placeholder) !important;
+}
+
+select {
+  background-color: var(--bg-input) !important;
+  color: var(--text-primary) !important;
+  border-color: var(--border-input) !important;
+}
+select:focus {
+  border-color: var(--border-focus) !important;
+  outline: none !important;
+  box-shadow: 0 0 0 1px var(--border-focus) !important;
+}
+select option {
+  background-color: var(--bg-dropdown) !important;
+  color: var(--text-primary) !important;
+}
+
+/* Prevent browser autofill from turning inputs white */
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+textarea:-webkit-autofill {
+  -webkit-box-shadow: 0 0 0 1000px var(--bg-dropdown) inset !important;
+  -webkit-text-fill-color: var(--text-primary) !important;
+  transition: background-color 5000s ease-in-out 0s;
+}
+
+/* ============================================================
+   GLOBAL TOASTER THEME (react-hot-toast via className)
+   ============================================================ */
+.leadnex-toast {
+  background-color: var(--bg-dropdown) !important;
+  color: var(--text-primary) !important;
+  border: 1px solid var(--border-secondary) !important;
+  font-family: inherit !important;
+  font-size: 0.8rem !important;
+  border-radius: 6px !important;
+  line-height: 1.4 !important;
+}
+
+[data-theme="dark"] .leadnex-toast {
+  box-shadow: 0 10px 30px -4px rgba(0, 0, 0, 0.6), 0 4px 12px -2px rgba(0, 0, 0, 0.4) !important;
+}
+
+[data-theme="light"] .leadnex-toast {
+  box-shadow: 0 10px 25px -4px rgba(0, 0, 0, 0.1), 0 4px 10px -2px rgba(0, 0, 0, 0.05) !important;
+}
