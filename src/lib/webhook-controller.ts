@@ -60,7 +60,7 @@ const FIELD_MAP: Record<string, ColumnKey> = {
   time_zone: "timeZone",
   language_preference: "languagePreference",
   lead_source: "leadSource",
-  contact_owner: "contactOwner",
+  // contact_owner: "contactOwner",
   contact_type: "contactType",
   prefered_contact_method: "preferedContactMethod",
   communication_preference: "communicationPreference",

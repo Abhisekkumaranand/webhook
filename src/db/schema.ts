@@ -56,7 +56,7 @@ export const callAnalytics = pgTable("call_analytics", {
 
   // ── Lead & CRM details ──────────────────────────────────────
   leadSource: text("lead_source"),
-  contactOwner: text("contact_owner"),
+  // contactOwner: text("contact_owner"),
   contactType: text("contact_type"),
   preferedContactMethod: text("prefered_contact_method"),
   communicationPreference: text("communication_preference"),

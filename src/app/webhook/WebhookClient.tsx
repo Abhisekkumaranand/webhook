@@ -635,9 +635,9 @@ export default function WebhookClient() {
                     <Grid size={{ xs: 12, sm: 6, md: 4 }}>
                       <Field label="Lead Source" placeholder="Website / Referral / Organic" value={formData.lead_source} onChange={(e) => handleChange("lead_source", e.target.value)} />
                     </Grid>
-                    <Grid size={{ xs: 12, sm: 6, md: 4 }}>
+                    {/* <Grid size={{ xs: 12, sm: 6, md: 4 }}>
                       <Field label="Contact Owner" placeholder="Sales Representative" value={formData.contact_owner} onChange={(e) => handleChange("contact_owner", e.target.value)} />
-                    </Grid>
+                    </Grid> */}
                     <Grid size={{ xs: 12, sm: 6, md: 4 }}>
                       <Field label="Contact Type" placeholder="Lead / Prospect / Customer" value={formData.contact_type} onChange={(e) => handleChange("contact_type", e.target.value)} />
                     </Grid>

@@ -169,7 +169,7 @@ export const SAMPLE_TEST_DATA: WebhookFormData = {
   language_preference: "English",
 
   lead_source: "Website Form",
-  contact_owner: "Sales Admin",
+  contact_owner: "",
   contact_type: "Lead",
   prefered_contact_method: "Phone",
   communication_preference: "WhatsApp & Email",
@@ -232,7 +232,7 @@ export function buildPayload(formData: WebhookFormData) {
     country: formData.country,
     date_of_birth: formData.date_of_birth,
     lead_source: formData.lead_source,
-    contact_owner: formData.contact_owner,
+    // contact_owner: formData.contact_owner,
     contact_type: formData.contact_type,
     prefered_contact_method: formData.prefered_contact_method,
     linkedin_profile: formData.linkedin_profile,
